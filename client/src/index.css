@@ -202,49 +202,24 @@ body {
   opacity: 0;
 }
 
-/* Very simple taxi animation */
-@keyframes move-right-to-left {
+/* Simple working taxi animation */
+@keyframes taxi-move {
   0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-200vw);
-  }
-}
-
-@keyframes move-left-to-right {
-  0% {
-    transform: translateX(-200vw);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}
-
-@keyframes flip-taxi {
-  0%, 100% {
-    transform: scaleX(1);
+    transform: translateX(100vw) scaleX(-1);
   }
   50% {
-    transform: scaleX(-1);
+    transform: translateX(-100vw) scaleX(-1);
+  }
+  50.1% {
+    transform: translateX(-100vw) scaleX(1);
+  }
+  100% {
+    transform: translateX(100vw) scaleX(1);
   }
 }
 
-.animate-taxi {
-  position: relative;
-  display: inline-block;
-}
-
-.animate-taxi-right {
-  animation: move-right-to-left 6s linear infinite;
-}
-
-.animate-taxi-left {
-  animation: move-left-to-right 6s linear infinite;
-}
-
-.animate-taxi-flip {
-  animation: flip-taxi 12s linear infinite;
+.animate-taxi-move {
+  animation: taxi-move 10s linear infinite;
 }
 
 @keyframes subtle-bounce {

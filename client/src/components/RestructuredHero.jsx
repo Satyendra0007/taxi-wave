@@ -8,8 +8,6 @@ export default function RestructuredHero({ pickup, setPickup, destination, setDe
   const [isLoadingLocation, setIsLoadingLocation] = useState(false)
   const [locationError, setLocationError] = useState('')
   const [currentAnimation, setCurrentAnimation] = useState(0)
-  const [taxiPosition, setTaxiPosition] = useState(0)
-  const [taxiDirection, setTaxiDirection] = useState('right')
 
   const animations = [
     { emoji: '👨‍💼', label: 'Business Traveler', desc: 'Getting to meetings on time' },
@@ -27,20 +25,6 @@ export default function RestructuredHero({ pickup, setPickup, destination, setDe
     }, 3000)
     return () => clearInterval(interval)
   }, [])
-
-  // Track taxi position and direction
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTaxiPosition((prev) => (prev + 1) % 100)
-      
-      // Change direction at 50% mark
-      if (taxiPosition === 50) {
-        setTaxiDirection(taxiDirection === 'right' ? 'left' : 'right')
-      }
-    }, 60) // Update every 60ms
-    
-    return () => clearInterval(interval)
-  }, [taxiPosition])
 
   // Get user's current location on component mount
   useEffect(() => {
@@ -87,7 +71,6 @@ export default function RestructuredHero({ pickup, setPickup, destination, setDe
         }
       )
     }
-
     getUserLocation()
   }, [])
 
@@ -118,9 +101,7 @@ export default function RestructuredHero({ pickup, setPickup, destination, setDe
                 <div className="flex items-center justify-center">
                   {/* Professional taxi moving full width */}
                   <div className="relative">
-                    <div className="text-8xl filter drop-shadow-lg" style={{ 
-                      transform: `translateX(${taxiPosition - 50}vw) scaleX(${taxiDirection === 'left' ? -1 : 1})` 
-                    }}>
+                    <div className="text-8xl filter drop-shadow-lg animate-taxi-move">
                       🚕
                     </div>
                     
