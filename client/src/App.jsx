@@ -11,6 +11,11 @@ import HourlyRental from './components/HourlyRental'
 import RiderDashboardFixed from './components/RiderDashboardFixed'
 
 function App() {
+  // State for dynamic pricing
+  const [pickup, setPickup] = useState('')
+  const [destination, setDestination] = useState('')
+  const [priorityPickup, setPriorityPickup] = useState(false)
+
   // State for dynamic pricing (now handled in RestructuredHero)
   const [user, setUser] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
@@ -19,7 +24,14 @@ function App() {
   return (
     <div className="min-h-screen">
       <Navbar />
-      <RestructuredHero />
+      <RestructuredHero 
+        pickup={pickup}
+        setPickup={setPickup}
+        destination={destination}
+        setDestination={setDestination}
+        priorityPickup={priorityPickup}
+        setPriorityPickup={setPriorityPickup}
+      />
       <Services />
       <BookingForm />
       <ParcelDelivery />
