@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { MapPin, Calendar, Clock, Users, Phone, Mail, CreditCard } from 'lucide-react'
+import { MapPin, Calendar, Clock, Users, Phone, Mail, CreditCard, Star, CheckCircle } from 'lucide-react'
 
 export default function BookingForm() {
   const [formData, setFormData] = useState({
@@ -15,6 +15,12 @@ export default function BookingForm() {
     paymentMethod: 'cash'
   })
 
+  const [formStatus, setFormStatus] = useState({
+    isSubmitting: false,
+    message: '',
+    showSuccess: false
+  })
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -24,6 +30,7 @@ export default function BookingForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setFormStatus({ isSubmitting: true, message: '', showSuccess: false })
 
     try {
       const response = await fetch('http://localhost:5001/api/bookings', {
@@ -37,7 +44,11 @@ export default function BookingForm() {
       const result = await response.json()
 
       if (result.success) {
-        alert(`Booking successful! Your reference is: ${result.booking.bookingReference}`)
+        setFormStatus({ 
+          isSubmitting: false, 
+          message: `Booking successful! Your reference is: ${result.booking.bookingReference}`, 
+          showSuccess: true 
+        })
         // Reset form
         setFormData({
           pickup: '',
@@ -52,23 +63,42 @@ export default function BookingForm() {
           paymentMethod: 'cash'
         })
       } else {
-        alert('Booking failed. Please try again.')
+        setFormStatus({ 
+          isSubmitting: false, 
+          message: result.error || 'Booking failed. Please try again.',
+          showSuccess: false 
+        })
       }
     } catch (error) {
       console.error('Error submitting booking:', error)
-      alert('Booking submitted! We will contact you shortly.')
+      setFormStatus({ 
+        isSubmitting: false, 
+        message: 'Booking submitted! We will contact you shortly.',
+        showSuccess: true 
+      })
     }
   }
 
   return (
-    <section id="booking" className="py-20 bg-gray-50">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Book Your Taxi</h2>
-          <p className="text-xl text-gray-600">Fill in the details below to reserve your ride</p>
+    <section id="booking" className="py-20 bg-gray-50 relative overflow-hidden">
+      {/* Animated background */}
+      <div className="absolute inset-0">
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-gray-50 via-white to-blue-50 opacity-30"></div>
+        <div className="absolute top-0 right-0 w-64 h-full bg-gradient-to-l from-white to-transparent opacity-10 animate-pulse"></div>
+        <div className="absolute bottom-0 left-0 w-64 h-full bg-gradient-to-t from-white to-transparent opacity-10 animate-pulse"></div>
+      </div>
+      
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="text-center mb-12 animate-fade-in">
+          <h2 className="text-4xl font-bold text-gray-900 mb-6 animate-slide-down">
+            Book Your Taxi
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto animate-fade-in-delay-1">
+            Fill in the details below to reserve your ride
+          </p>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-xl p-8">
+        <div className="bg-white rounded-2xl shadow-xl p-8 animate-fade-in-delay-2">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
@@ -82,7 +112,7 @@ export default function BookingForm() {
                   value={formData.pickup}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                  className="w-full pl-12 pr-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
                   placeholder="Enter pickup address"
                 />
               </div>
@@ -98,7 +128,7 @@ export default function BookingForm() {
                   value={formData.destination}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                  className="w-full pl-12 pr-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
                   placeholder="Enter destination"
                 />
               </div>
@@ -114,7 +144,8 @@ export default function BookingForm() {
                   value={formData.date}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                  className="w-full pl-12 pr-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                  min={new Date().toISOString().split('T')[0]}
                 />
               </div>
 
@@ -129,7 +160,7 @@ export default function BookingForm() {
                   value={formData.time}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                  className="w-full pl-12 pr-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
                 />
               </div>
 
@@ -142,7 +173,7 @@ export default function BookingForm() {
                   name="passengers"
                   value={formData.passengers}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                  className="w-full pl-12 pr-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
                 >
                   <option value="1">1 Passenger</option>
                   <option value="2">2 Passengers</option>
@@ -156,12 +187,14 @@ export default function BookingForm() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Vehicle Type</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Vehicle Type
+                </label>
                 <select
                   name="vehicleType"
                   value={formData.vehicleType}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                  className="w-full pl-12 pr-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
                 >
                   <option value="standard">Standard (4 seats)</option>
                   <option value="comfort">Comfort (4 seats)</option>
@@ -182,7 +215,7 @@ export default function BookingForm() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
                     placeholder="Enter your name"
                   />
                 </div>
@@ -198,7 +231,7 @@ export default function BookingForm() {
                     value={formData.phone}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
                     placeholder="+32 2 123 45 67"
                   />
                 </div>
@@ -214,7 +247,7 @@ export default function BookingForm() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
                     placeholder="your@email.com"
                   />
                 </div>
@@ -228,7 +261,7 @@ export default function BookingForm() {
                     name="paymentMethod"
                     value={formData.paymentMethod}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
                   >
                     <option value="cash">Cash</option>
                     <option value="card">Credit Card</option>

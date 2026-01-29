@@ -8,7 +8,8 @@ export default function RestructuredHero({ pickup, setPickup, destination, setDe
   const [isLoadingLocation, setIsLoadingLocation] = useState(false)
   const [locationError, setLocationError] = useState('')
   const [currentAnimation, setCurrentAnimation] = useState(0)
-  const [taxiDirection, setTaxiDirection] = useState('right-to-left')
+  const [taxiPosition, setTaxiPosition] = useState(0)
+  const [taxiDirection, setTaxiDirection] = useState('right')
 
   const animations = [
     { emoji: '👨‍💼', label: 'Business Traveler', desc: 'Getting to meetings on time' },
@@ -27,22 +28,19 @@ export default function RestructuredHero({ pickup, setPickup, destination, setDe
     return () => clearInterval(interval)
   }, [])
 
-  // Track taxi direction based on animation progress
+  // Track taxi position and direction
   useEffect(() => {
-    const directionInterval = setInterval(() => {
-      const now = Date.now() / 1000; // Convert to seconds
-      const cycleTime = 15; // 15 seconds per cycle
-      const progress = (now % cycleTime) / cycleTime;
+    const interval = setInterval(() => {
+      setTaxiPosition((prev) => (prev + 1) % 100)
       
-      if (progress < 0.5) {
-        setTaxiDirection('right-to-left');
-      } else {
-        setTaxiDirection('left-to-right');
+      // Change direction at 50% mark
+      if (taxiPosition === 50) {
+        setTaxiDirection(taxiDirection === 'right' ? 'left' : 'right')
       }
-    }, 100);
+    }, 60) // Update every 60ms
     
-    return () => clearInterval(directionInterval);
-  }, [])
+    return () => clearInterval(interval)
+  }, [taxiPosition])
 
   // Get user's current location on component mount
   useEffect(() => {
@@ -120,28 +118,27 @@ export default function RestructuredHero({ pickup, setPickup, destination, setDe
                 <div className="flex items-center justify-center">
                   {/* Professional taxi moving full width */}
                   <div className="relative">
-                    <div className="animate-taxi animate-taxi-flip">
-                      {/* Premium taxi emoji */}
-                      <div className="text-8xl filter drop-shadow-lg">
-                        🚕
-                      </div>
-                      
-                      {/* Professional person inside */}
-                      <div className="absolute top-3 left-1/2 transform -translate-x-1/2">
-                        <div className="text-3xl animate-subtle-bounce">👨‍💼</div>
-                      </div>
-                      
-                      {/* Professional movement indicators */}
-                      <div className="absolute -bottom-2 left-0 right-0 h-1 bg-white/20 rounded-full"></div>
-                      <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-white/40 rounded-full animate-pulse"></div>
-                      
-                      {/* Speed lines */}
-                      <div className="absolute top-1/2 -left-12 transform -translate-y-1/2">
-                        <div className="flex space-x-1">
-                          <div className="w-6 h-0.5 bg-white/40 rounded animate-speed-line"></div>
-                          <div className="w-4 h-0.5 bg-white/30 rounded animate-speed-line" style={{ animationDelay: '0.1s' }}></div>
-                          <div className="w-3 h-0.5 bg-white/20 rounded animate-speed-line" style={{ animationDelay: '0.2s' }}></div>
-                        </div>
+                    <div className="text-8xl filter drop-shadow-lg" style={{ 
+                      transform: `translateX(${taxiPosition - 50}vw) scaleX(${taxiDirection === 'left' ? -1 : 1})` 
+                    }}>
+                      🚕
+                    </div>
+                    
+                    {/* Professional person inside */}
+                    <div className="absolute top-3 left-1/2 transform -translate-x-1/2">
+                      <div className="text-3xl animate-subtle-bounce">👨‍💼</div>
+                    </div>
+                    
+                    {/* Professional movement indicators */}
+                    <div className="absolute -bottom-2 left-0 right-0 h-1 bg-white/20 rounded-full"></div>
+                    <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-white/40 rounded-full animate-pulse"></div>
+                    
+                    {/* Speed lines */}
+                    <div className="absolute top-1/2 -left-12 transform -translate-y-1/2">
+                      <div className="flex space-x-1">
+                        <div className="w-6 h-0.5 bg-white/40 rounded animate-speed-line"></div>
+                        <div className="w-4 h-0.5 bg-white/30 rounded animate-speed-line" style={{ animationDelay: '0.1s' }}></div>
+                        <div className="w-3 h-0.5 bg-white/20 rounded animate-speed-line" style={{ animationDelay: '0.2s' }}></div>
                       </div>
                     </div>
                   </div>
