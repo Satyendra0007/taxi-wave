@@ -1,14 +1,32 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from 'react'
+import Navbar from './components/NavbarFixed'
+import RestructuredHero from './components/RestructuredHero'
+import Services from './components/Services'
+import BookingForm from './components/BookingForm'
+import About from './components/About'
+import Contact from './components/Contact'
+import Footer from './components/Footer'
+import ParcelDelivery from './components/ParcelDelivery'
+import HourlyRental from './components/HourlyRental'
+import RiderDashboardFixed from './components/RiderDashboardFixed'
 
 function App() {
-  const [count, setCount] = useState(0)
+  // No authentication required - direct access to the website
+  const [user, setUser] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
 
+  // Show regular user interface (no login required)
   return (
-    <div className='bg-red-600 text-white'>
-      Hello world
+    <div className="min-h-screen">
+      <Navbar />
+      <RestructuredHero />
+      <Services />
+      <BookingForm />
+      <ParcelDelivery />
+      <HourlyRental />
+      <About />
+      <Contact />
+      <Footer />
     </div>
   )
 }
