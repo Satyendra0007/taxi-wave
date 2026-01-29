@@ -1,14 +1,14 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import Navbar from './components/NavbarFixed'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <div className='bg-red-600 text-white'>
-      Hello world
+    <div className="min-h-screen">
+      <Navbar />
+      <div className="container mx-auto px-4 py-8">
+        <h1 className="text-4xl font-bold text-center mb-8">TaxiWave</h1>
+        <p className="text-center text-gray-600">Your premium taxi service in Belgium</p>
+      </div>
     </div>
   )
 }
