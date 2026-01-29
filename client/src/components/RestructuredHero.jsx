@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { MapPin, Navigation, Package, Timer, Zap, Car, Users2, Briefcase, Plane } from 'lucide-react'
 import SimpleMap from './SimpleMap'
+import DynamicPricing from './DynamicPricing'
 
 export default function RestructuredHero({ pickup, setPickup, destination, setDestination, priorityPickup, setPriorityPickup }) {
   const [activeTab, setActiveTab] = useState('ride')
