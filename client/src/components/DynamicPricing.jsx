@@ -124,74 +124,53 @@ export default function DynamicPricing({ pickup, destination, onVehicleSelect, p
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-xl p-6 animate-in slide-in-from-bottom duration-300">
-      <div className="flex items-center justify-between mb-6">
-        <h3 className="text-xl font-bold text-gray-900">Choose your ride</h3>
-        <div className="flex items-center space-x-4 text-sm text-gray-600">
+    <div className="bg-white rounded-xl shadow-lg p-4 border border-gray-100 animate-in slide-in-from-bottom duration-300">
+      <div className="flex items-center justify-between mb-3">
+        <h3 className="text-lg font-semibold text-gray-900">Available rides</h3>
+        <div className="flex items-center space-x-3 text-xs text-gray-600">
           <div className="flex items-center space-x-1">
-            <MapPin className="h-4 w-4" />
+            <MapPin className="h-3 w-3" />
             <span>{estimatedDistance.toFixed(1)} km</span>
           </div>
           <div className="flex items-center space-x-1">
-            <Clock className="h-4 w-4" />
+            <Clock className="h-3 w-3" />
             <span>{Math.round(estimatedTime)} min</span>
           </div>
         </div>
       </div>
 
       {isLoading ? (
-        <div className="flex items-center justify-center py-12">
+        <div className="flex items-center justify-center py-8">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto mb-4"></div>
-            <p className="text-gray-600">Calculating best prices...</p>
+            <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500 mx-auto mb-3"></div>
+            <p className="text-sm text-gray-600">Finding rides...</p>
           </div>
         </div>
       ) : (
-        <div className="space-y-3">
+        <div className="space-y-2">
           {belgianVehicles.map((vehicle) => (
             <div
               key={vehicle.id}
               onClick={() => handleVehicleSelect(vehicle)}
-              className="border-2 border-gray-200 rounded-lg p-4 hover:border-blue-500 transition-all cursor-pointer hover:shadow-md group"
+              className="flex items-center justify-between p-3 border border-gray-200 rounded-lg hover:border-blue-500 transition-all cursor-pointer hover:shadow-md group bg-white"
             >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-4">
-                  <div className="text-3xl group-hover:scale-110 transition-transform">{vehicle.image}</div>
-                  <div>
-                    <div className="flex items-center space-x-2">
-                      <div className="font-semibold text-gray-900">{vehicle.name}</div>
-                      {vehicle.badge && (
-                        <span className="bg-black text-white text-xs px-2 py-1 rounded-full">
-                          {vehicle.badge}
-                        </span>
-                      )}
-                    </div>
-                    <div className="text-sm text-gray-600">{vehicle.model}</div>
-                    <div className="flex items-center space-x-4 mt-1">
-                      <div className="text-xs text-gray-500">{vehicle.time} away</div>
-                      <div className="text-xs text-gray-500">• {vehicle.seats} seats</div>
-                      {priorityPickup && (
-                        <div className="flex items-center space-x-1 text-xs text-blue-600">
-                          <Zap className="h-3 w-3" />
-                          <span>Priority</span>
-                        </div>
-                      )}
-                    </div>
+              <div className="flex items-center space-x-3">
+                <div className="text-2xl group-hover:scale-110 transition-transform">{vehicle.image}</div>
+                <div className="flex-1">
+                  <div className="flex items-center space-x-2">
+                    <div className="font-medium text-gray-900 text-sm">{vehicle.name}</div>
+                    {vehicle.badge && (
+                      <span className="bg-black text-white text-xs px-2 py-0.5 rounded-full">
+                        {vehicle.badge}
+                      </span>
+                    )}
                   </div>
-                </div>
-                <div className="text-right">
-                  <div className="text-lg font-bold text-gray-900">€{calculatePrice(vehicle)}</div>
-                  <div className="text-xs text-gray-500">estimated fare</div>
+                  <div className="text-xs text-gray-500">{vehicle.time} away</div>
                 </div>
               </div>
-
-              {/* Features */}
-              <div className="mt-3 flex flex-wrap gap-2">
-                {vehicle.features.map((feature, index) => (
-                  <span key={index} className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded">
-                    {feature}
-                  </span>
-                ))}
+              <div className="text-right">
+                <div className="text-base font-bold text-gray-900">€{calculatePrice(vehicle)}</div>
+                <div className="text-xs text-gray-500">estimated fare</div>
               </div>
             </div>
           ))}

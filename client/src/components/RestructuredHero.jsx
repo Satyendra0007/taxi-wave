@@ -103,7 +103,7 @@ export default function RestructuredHero({ pickup, setPickup, destination, setDe
                   <div className="relative animate-full-width-travel">
                     <div className="relative">
                       {/* Premium taxi emoji */}
-                      <div className="text-8xl filter drop-shadow-lg" style={{ transform: 'scaleX(1)' }}>
+                      <div className="text-8xl filter drop-shadow-lg">
                         🚕
                       </div>
                       
@@ -271,6 +271,16 @@ export default function RestructuredHero({ pickup, setPickup, destination, setDe
                 <button className="w-full bg-gradient-to-r from-blue-600 to-sky-500 text-white py-4 rounded-lg font-semibold hover:from-blue-700 hover:to-sky-600 transition-all duration-300 transform hover:scale-105 hover:shadow-lg shadow-professional">
                   {activeTab === 'ride' ? 'See prices' : activeTab === 'parcel' ? 'Send Parcel' : 'Book Hourly'}
                 </button>
+              </div>
+
+              {/* Compact Dynamic Pricing Section */}
+              <div className="mt-4">
+                <DynamicPricing 
+                  pickup={pickup}
+                  destination={destination}
+                  onVehicleSelect={(vehicle) => console.log('Vehicle selected:', vehicle)}
+                  priorityPickup={priorityPickup}
+                />
               </div>
             </div>
           </div>
