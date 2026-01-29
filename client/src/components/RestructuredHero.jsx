@@ -2,13 +2,10 @@ import { useState, useEffect } from 'react'
 import { MapPin, Navigation, Package, Timer, Zap, Car, Users2, Briefcase, Plane } from 'lucide-react'
 import SimpleMap from './SimpleMap'
 
-export default function RestructuredHero() {
+export default function RestructuredHero({ pickup, setPickup, destination, setDestination, priorityPickup, setPriorityPickup }) {
   const [activeTab, setActiveTab] = useState('ride')
-  const [pickup, setPickup] = useState('')
-  const [destination, setDestination] = useState('')
   const [isLoadingLocation, setIsLoadingLocation] = useState(false)
   const [locationError, setLocationError] = useState('')
-  const [priorityPickup, setPriorityPickup] = useState(false)
   const [currentAnimation, setCurrentAnimation] = useState(0)
 
   const animations = [

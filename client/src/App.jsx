@@ -12,20 +12,38 @@ import HourlyRental from './components/HourlyRental'
 import RiderDashboardFixed from './components/RiderDashboardFixed'
 
 function App() {
+  // State for dynamic pricing
+  const [pickup, setPickup] = useState('')
+  const [destination, setDestination] = useState('')
+  const [priorityPickup, setPriorityPickup] = useState(false)
+  const [selectedVehicle, setSelectedVehicle] = useState(null)
+
   // No authentication required - direct access to the website
   const [user, setUser] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
+
+  const handleVehicleSelect = (vehicle) => {
+    setSelectedVehicle(vehicle)
+    console.log('Vehicle selected:', vehicle)
+  }
 
   // Show regular user interface (no login required)
   return (
     <div className="min-h-screen">
       <Navbar />
-      <RestructuredHero />
+      <RestructuredHero 
+        pickup={pickup}
+        setPickup={setPickup}
+        destination={destination}
+        setDestination={setDestination}
+        priorityPickup={priorityPickup}
+        setPriorityPickup={setPriorityPickup}
+      />
       <DynamicPricing 
-        pickup=""
-        destination=""
-        onVehicleSelect={(vehicle) => console.log('Vehicle selected:', vehicle)}
-        priorityPickup={false}
+        pickup={pickup}
+        destination={destination}
+        onVehicleSelect={handleVehicleSelect}
+        priorityPickup={priorityPickup}
       />
       <Services />
       <BookingForm />
