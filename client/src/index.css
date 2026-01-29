@@ -11,3 +11,219 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/* Custom animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Moving vehicle animations */
+@keyframes move-right {
+  0% {
+    transform: translateX(-20px);
+  }
+  50% {
+    transform: translateX(20px);
+  }
+  100% {
+    transform: translateX(-20px);
+  }
+}
+
+@keyframes move-left {
+  0% {
+    transform: translateX(20px);
+  }
+  50% {
+    transform: translateX(-20px);
+  }
+  100% {
+    transform: translateX(20px);
+  }
+}
+
+/* Professional travel animations */
+@keyframes full-width-travel {
+  0% {
+    transform: translateX(100vw);
+  }
+  25% {
+    transform: translateX(0vw);
+  }
+  50% {
+    transform: translateX(-100vw);
+  }
+  75% {
+    transform: translateX(0vw);
+  }
+  100% {
+    transform: translateX(100vw);
+  }
+}
+
+@keyframes subtle-bounce {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes speed-line {
+  0% {
+    transform: translateX(0px);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-30px);
+    opacity: 0;
+  }
+}
+
+@keyframes road-professional {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes subtle-float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-full-width-travel {
+  animation: full-width-travel 6s linear infinite;
+}
+
+.animate-subtle-bounce {
+  animation: subtle-bounce 2s ease-in-out infinite;
+}
+
+.animate-speed-line {
+  animation: speed-line 1s ease-out infinite;
+}
+
+.animate-road-professional {
+  animation: road-professional 2s linear infinite;
+}
+
+.animate-subtle-float {
+  animation: subtle-float 4s ease-in-out infinite;
+}
+
+/* Travel animations for people in taxis */
+@keyframes travel-right {
+  0% {
+    transform: translateX(-30px);
+  }
+  25% {
+    transform: translateX(10px);
+  }
+  50% {
+    transform: translateX(30px);
+  }
+  75% {
+    transform: translateX(10px);
+  }
+  100% {
+    transform: translateX(-30px);
+  }
+}
+
+@keyframes travel-left {
+  0% {
+    transform: translateX(30px);
+  }
+  25% {
+    transform: translateX(-10px);
+  }
+  50% {
+    transform: translateX(-30px);
+  }
+  75% {
+    transform: translateX(-10px);
+  }
+  100% {
+    transform: translateX(30px);
+  }
+}
+
+.animate-move-right {
+  animation: move-right 4s ease-in-out infinite;
+}
+
+.animate-move-left {
+  animation: move-left 3s ease-in-out infinite;
+}
+
+.animate-travel-right {
+  animation: travel-right 5s ease-in-out infinite;
+}
+
+.animate-travel-left {
+  animation: travel-left 4s ease-in-out infinite;
+}
+
+/* Smooth transitions */
+.transition-all {
+  transition: all 0.3s ease;
+}
+
+/* Enhanced hover effects */
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+/* Professional shadows */
+.shadow-professional {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Gradient text animation */
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+}
+
+/* Road animation */
+@keyframes road-move {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-road {
+  animation: road-move 2s linear infinite;
+}

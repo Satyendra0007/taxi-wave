@@ -87,27 +87,78 @@ export default function RestructuredHero() {
 
   return (
     <section className="bg-gradient-to-br from-blue-50 via-white to-sky-50 pt-24 pb-20 relative overflow-hidden">
-      {/* Full-width reduced-height animation bar */}
-      <div className="w-full bg-gradient-to-r from-blue-600 to-sky-500 py-6 mb-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Professional Full-width animation bar with single vehicle */}
+      <div className="w-full bg-gradient-to-r from-blue-600 via-sky-500 to-blue-600 py-8 mb-8 relative overflow-hidden">
+        {/* Subtle animated background */}
+        <div className="absolute inset-0">
+          <div className="absolute top-0 left-0 w-full h-full bg-white opacity-3"></div>
+          <div className="absolute top-0 left-0 w-64 h-full bg-gradient-to-r from-white to-transparent opacity-5 animate-pulse"></div>
+          <div className="absolute top-0 right-0 w-64 h-full bg-gradient-to-l from-white to-transparent opacity-5 animate-pulse"></div>
+        </div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-8">
-              <div className="text-center animate-bounce">
-                <div className="text-3xl mb-1">{animations[currentAnimation].emoji}</div>
-                <div className="text-white text-sm font-medium">{animations[currentAnimation].label}</div>
-              </div>
-              <div className="text-white text-2xl animate-pulse">🚕</div>
-              <div className="text-center animate-bounce" style={{ animationDelay: '0.5s' }}>
-                <div className="text-3xl mb-1">{animations[(currentAnimation + 1) % animations.length].emoji}</div>
-                <div className="text-white text-sm font-medium">{animations[(currentAnimation + 1) % animations.length].label}</div>
+            <div className="flex items-center space-x-12">
+              {/* Single professional vehicle animation */}
+              <div className="relative w-full max-w-4xl">
+                <div className="flex items-center justify-center">
+                  {/* Professional taxi moving full width */}
+                  <div className="relative animate-full-width-travel">
+                    <div className="relative">
+                      {/* Premium taxi emoji */}
+                      <div className="text-8xl filter drop-shadow-lg">🚕</div>
+                      
+                      {/* Professional person inside */}
+                      <div className="absolute top-3 left-1/2 transform -translate-x-1/2">
+                        <div className="text-3xl animate-subtle-bounce">👨‍💼</div>
+                      </div>
+                      
+                      {/* Professional movement indicators */}
+                      <div className="absolute -bottom-2 left-0 right-0 h-1 bg-white/20 rounded-full"></div>
+                      <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-white/40 rounded-full animate-pulse"></div>
+                      
+                      {/* Speed lines */}
+                      <div className="absolute top-1/2 -left-12 transform -translate-y-1/2">
+                        <div className="flex space-x-1">
+                          <div className="w-6 h-0.5 bg-white/40 rounded animate-speed-line"></div>
+                          <div className="w-4 h-0.5 bg-white/30 rounded animate-speed-line" style={{ animationDelay: '0.1s' }}></div>
+                          <div className="w-3 h-0.5 bg-white/20 rounded animate-speed-line" style={{ animationDelay: '0.2s' }}></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Professional road */}
+                <div className="absolute -bottom-4 left-0 right-0 h-2 bg-white/10 rounded-full overflow-hidden">
+                  <div className="h-full">
+                    <div className="w-full h-0.5 bg-white/20 animate-road-professional"></div>
+                  </div>
+                </div>
+                
+                {/* Minimal side decorations */}
+                <div className="absolute -top-1 left-8 text-xl opacity-20 animate-subtle-float">🌳</div>
+                <div className="absolute -top-1 right-8 text-xl opacity-20 animate-subtle-float" style={{ animationDelay: '1s' }}>🏢</div>
               </div>
             </div>
-            <div className="text-white">
-              <div className="text-2xl font-bold">Who's riding today?</div>
-              <div className="text-sm opacity-90">Join thousands of Belgians choosing TaxiWave</div>
+            
+            <div className="text-right">
+              <div className="text-3xl font-bold text-white mb-2">Premium Taxi Service</div>
+              <div className="text-white/90 text-sm">Professional transportation across Belgium</div>
+              <div className="flex items-center justify-end space-x-1 mt-2">
+                <div className="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></div>
+                <div className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" style={{ animationDelay: '0.3s' }}></div>
+                <div className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" style={{ animationDelay: '0.6s' }}></div>
+              </div>
             </div>
           </div>
         </div>
+        
+        {/* Minimal floating elements */}
+        <div className="absolute top-4 left-10 text-xl animate-subtle-float opacity-15">✨</div>
+        <div className="absolute top-6 right-20 text-lg animate-subtle-float opacity-15" style={{ animationDelay: '1.2s' }}>🌟</div>
+        <div className="absolute bottom-4 left-1/4 text-base animate-subtle-float opacity-15" style={{ animationDelay: '0.6s' }}>💫</div>
+        <div className="absolute bottom-6 right-1/3 text-lg animate-subtle-float opacity-15" style={{ animationDelay: '1.8s' }}>⭐</div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -123,15 +174,15 @@ export default function RestructuredHero() {
               </p>
             </div>
 
-            {/* Service Type Tabs */}
-            <div className="bg-white rounded-2xl shadow-xl p-6 mb-6">
+            {/* Professional Service Type Tabs */}
+            <div className="bg-white rounded-2xl shadow-professional p-6 mb-6 border border-gray-100">
               <div className="flex space-x-2 mb-6">
                 <button
                   onClick={() => setActiveTab('ride')}
-                  className={`flex-1 py-3 px-4 rounded-lg font-semibold transition ${
+                  className={`flex-1 py-3 px-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 ${
                     activeTab === 'ride' 
-                      ? 'bg-black text-white' 
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      ? 'bg-gradient-to-r from-blue-600 to-sky-500 text-white shadow-lg' 
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:shadow-md'
                   }`}
                 >
                   <div className="flex items-center justify-center space-x-2">
@@ -141,10 +192,10 @@ export default function RestructuredHero() {
                 </button>
                 <button
                   onClick={() => setActiveTab('parcel')}
-                  className={`flex-1 py-3 px-4 rounded-lg font-semibold transition ${
+                  className={`flex-1 py-3 px-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 ${
                     activeTab === 'parcel' 
-                      ? 'bg-black text-white' 
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      ? 'bg-gradient-to-r from-blue-600 to-sky-500 text-white shadow-lg' 
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:shadow-md'
                   }`}
                 >
                   <div className="flex items-center justify-center space-x-2">
@@ -154,10 +205,10 @@ export default function RestructuredHero() {
                 </button>
                 <button
                   onClick={() => setActiveTab('hourly')}
-                  className={`flex-1 py-3 px-4 rounded-lg font-semibold transition ${
+                  className={`flex-1 py-3 px-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 ${
                     activeTab === 'hourly' 
-                      ? 'bg-black text-white' 
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      ? 'bg-gradient-to-r from-blue-600 to-sky-500 text-white shadow-lg' 
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:shadow-md'
                   }`}
                 >
                   <div className="flex items-center justify-center space-x-2">
@@ -167,16 +218,16 @@ export default function RestructuredHero() {
                 </button>
               </div>
 
-              {/* Booking Form */}
+              {/* Enhanced Booking Form */}
               <div className="space-y-4">
-                <div className="relative">
-                  <MapPin className="absolute left-4 top-4 h-5 w-5 text-blue-500" />
+                <div className="relative group">
+                  <MapPin className="absolute left-4 top-4 h-5 w-5 text-blue-500 group-hover:scale-110 transition-transform" />
                   <input
                     type="text"
                     placeholder={isLoadingLocation ? "Getting your location..." : "Enter pickup location"}
                     value={pickup}
                     onChange={(e) => setPickup(e.target.value)}
-                    className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none"
+                    className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all duration-300 hover:border-gray-300"
                     disabled={isLoadingLocation}
                   />
                   {isLoadingLocation && (
@@ -186,26 +237,26 @@ export default function RestructuredHero() {
                   )}
                 </div>
 
-                <div className="relative">
-                  <MapPin className="absolute left-4 top-4 h-5 w-5 text-red-500" />
+                <div className="relative group">
+                  <MapPin className="absolute left-4 top-4 h-5 w-5 text-red-500 group-hover:scale-110 transition-transform" />
                   <input
                     type="text"
                     placeholder="Where to?"
                     value={destination}
                     onChange={(e) => setDestination(e.target.value)}
-                    className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none"
+                    className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all duration-300 hover:border-gray-300"
                   />
                 </div>
 
                 {locationError && (
-                  <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3">
+                  <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 animate-pulse">
                     <p className="text-sm text-yellow-800">{locationError}</p>
                   </div>
                 )}
 
-                {/* Priority Pickup Option */}
-                <div className="flex items-center space-x-3 p-3 bg-blue-50 rounded-lg">
-                  <Zap className="h-5 w-5 text-blue-500" />
+                {/* Enhanced Priority Pickup Option */}
+                <div className="flex items-center space-x-3 p-4 bg-gradient-to-r from-blue-50 to-sky-50 rounded-lg border border-blue-200 hover:shadow-md transition-all duration-300">
+                  <Zap className="h-5 w-5 text-blue-500 animate-pulse" />
                   <div className="flex-1">
                     <div className="font-semibold text-gray-900">Priority Pickup</div>
                     <div className="text-sm text-gray-600">Get picked up in 10 minutes (+€5)</div>
@@ -214,11 +265,11 @@ export default function RestructuredHero() {
                     type="checkbox"
                     checked={priorityPickup}
                     onChange={(e) => setPriorityPickup(e.target.checked)}
-                    className="h-5 w-5 text-blue-500 rounded focus:ring-blue-500"
+                    className="h-5 w-5 text-blue-500 rounded focus:ring-2 focus:ring-blue-200 focus:ring-offset-2"
                   />
                 </div>
 
-                <button className="w-full bg-black text-white py-4 rounded-lg font-semibold hover:bg-gray-800 transition">
+                <button className="w-full bg-gradient-to-r from-blue-600 to-sky-500 text-white py-4 rounded-lg font-semibold hover:from-blue-700 hover:to-sky-600 transition-all duration-300 transform hover:scale-105 hover:shadow-lg shadow-professional">
                   {activeTab === 'ride' ? 'See prices' : activeTab === 'parcel' ? 'Send Parcel' : 'Book Hourly'}
                 </button>
               </div>
