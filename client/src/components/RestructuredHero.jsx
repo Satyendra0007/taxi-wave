@@ -119,11 +119,11 @@ export default function RestructuredHero({ pickup, setPickup, destination, setDe
               <div className="relative w-full max-w-4xl">
                 <div className="flex items-center justify-center">
                   {/* Professional taxi moving full width */}
-                  <div className="relative animate-full-width-travel">
-                    <div className="relative">
-                      {/* Premium taxi emoji - changes based on direction */}
+                  <div className="relative">
+                    <div className="animate-taxi animate-taxi-flip">
+                      {/* Premium taxi emoji */}
                       <div className="text-8xl filter drop-shadow-lg">
-                        <span className="inline-block animate-taxi-direction">🚕</span>
+                        🚕
                       </div>
                       
                       {/* Professional person inside */}
