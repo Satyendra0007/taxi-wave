@@ -8,6 +8,7 @@ export default function RestructuredHero({ pickup, setPickup, destination, setDe
   const [isLoadingLocation, setIsLoadingLocation] = useState(false)
   const [locationError, setLocationError] = useState('')
   const [currentAnimation, setCurrentAnimation] = useState(0)
+  const [taxiDirection, setTaxiDirection] = useState('right-to-left')
 
   const animations = [
     { emoji: '👨‍💼', label: 'Business Traveler', desc: 'Getting to meetings on time' },
@@ -24,6 +25,23 @@ export default function RestructuredHero({ pickup, setPickup, destination, setDe
       setCurrentAnimation((prev) => (prev + 1) % animations.length)
     }, 3000)
     return () => clearInterval(interval)
+  }, [])
+
+  // Track taxi direction based on animation progress
+  useEffect(() => {
+    const directionInterval = setInterval(() => {
+      const now = Date.now() / 1000; // Convert to seconds
+      const cycleTime = 15; // 15 seconds per cycle
+      const progress = (now % cycleTime) / cycleTime;
+      
+      if (progress < 0.5) {
+        setTaxiDirection('right-to-left');
+      } else {
+        setTaxiDirection('left-to-right');
+      }
+    }, 100);
+    
+    return () => clearInterval(directionInterval);
   }, [])
 
   // Get user's current location on component mount
@@ -103,9 +121,9 @@ export default function RestructuredHero({ pickup, setPickup, destination, setDe
                   {/* Professional taxi moving full width */}
                   <div className="relative animate-full-width-travel">
                     <div className="relative">
-                      {/* Premium taxi emoji */}
+                      {/* Premium taxi emoji - changes based on direction */}
                       <div className="text-8xl filter drop-shadow-lg">
-                        🚕
+                        {taxiDirection === 'right-to-left' ? '🚕' : '🚙'}
                       </div>
                       
                       {/* Professional person inside */}
