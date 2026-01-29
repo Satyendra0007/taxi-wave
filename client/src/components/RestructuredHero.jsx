@@ -121,9 +121,9 @@ export default function RestructuredHero({ pickup, setPickup, destination, setDe
                   {/* Professional taxi moving full width */}
                   <div className="relative animate-full-width-travel">
                     <div className="relative">
-                      {/* Premium taxi emoji - changes based on direction */}
-                      <div className="text-8xl filter drop-shadow-lg">
-                        {taxiDirection === 'right-to-left' ? '🚕' : '🚙'}
+                      {/* Premium taxi emoji - always facing forward */}
+                      <div className="text-8xl filter drop-shadow-lg" style={{ transform: 'scaleX(1)' }}>
+                        🚕
                       </div>
                       
                       {/* Professional person inside */}

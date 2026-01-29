@@ -51,22 +51,19 @@ body {
   }
 }
 
-/* Professional travel animations without flip */
+/* Professional travel animations - right to left, then left to right */
 @keyframes full-width-travel {
   0% {
-    transform: translateX(100vw);
-  }
-  25% {
-    transform: translateX(0vw);
+    transform: translateX(100vw) scaleX(-1);
   }
   50% {
-    transform: translateX(-100vw);
+    transform: translateX(-100vw) scaleX(-1);
   }
-  75% {
-    transform: translateX(0vw);
+  50.1% {
+    transform: translateX(-100vw) scaleX(1);
   }
   100% {
-    transform: translateX(100vw);
+    transform: translateX(100vw) scaleX(1);
   }
 }
 
