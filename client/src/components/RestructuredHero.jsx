@@ -103,7 +103,9 @@ export default function RestructuredHero({ pickup, setPickup, destination, setDe
                   <div className="relative animate-full-width-travel">
                     <div className="relative">
                       {/* Premium taxi emoji */}
-                      <div className="text-8xl filter drop-shadow-lg">🚕</div>
+                      <div className="text-8xl filter drop-shadow-lg" style={{ transform: 'scaleX(1)' }}>
+                        🚕
+                      </div>
                       
                       {/* Professional person inside */}
                       <div className="absolute top-3 left-1/2 transform -translate-x-1/2">

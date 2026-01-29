@@ -54,19 +54,19 @@ body {
 /* Professional travel animations */
 @keyframes full-width-travel {
   0% {
-    transform: translateX(100vw);
+    transform: translateX(100vw) scaleX(1);
   }
   25% {
-    transform: translateX(0vw);
+    transform: translateX(0vw) scaleX(1);
   }
   50% {
-    transform: translateX(-100vw);
+    transform: translateX(-100vw) scaleX(-1);
   }
   75% {
-    transform: translateX(0vw);
+    transform: translateX(0vw) scaleX(-1);
   }
   100% {
-    transform: translateX(100vw);
+    transform: translateX(100vw) scaleX(1);
   }
 }
 
@@ -112,7 +112,7 @@ body {
 }
 
 .animate-full-width-travel {
-  animation: full-width-travel 6s linear infinite;
+  animation: full-width-travel 12s linear infinite;
 }
 
 .animate-subtle-bounce {
@@ -124,7 +124,7 @@ body {
 }
 
 .animate-road-professional {
-  animation: road-professional 2s linear infinite;
+  animation: road-professional 3s linear infinite;
 }
 
 .animate-subtle-float {
